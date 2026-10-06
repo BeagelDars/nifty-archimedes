@@ -1,0 +1,249 @@
+/* Google Chrome Offline "No Internet" Page Styles */
+/* Light Mode Design - Carter PCs Edition */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #5f6368;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.offline {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Centered 600px wrapper strictly matching Google Chrome */
+.interstitial-wrapper {
+  color: #5f6368;
+  font-size: 1em;
+  line-height: 1.55;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 60px 20px 40px;
+  width: 100%;
+  position: relative;
+}
+
+#main-content {
+  margin-top: 0;
+}
+
+/* Dedicated Game Area: strictly 150px height, 600px max width */
+.game-container {
+  height: 150px;
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+/* Subtle instruction prompt */
+.game-instructions {
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #70757a;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+.game-instructions kbd {
+  background-color: #f1f3f4;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  color: #3c4043;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  display: inline-block;
+}
+
+.offline.playing-mode .game-instructions {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Static offline icon positioned at y=93px matching waiting dino feet */
+.icon {
+  user-select: none;
+  -webkit-user-select: none;
+  display: block;
+}
+
+.icon-offline {
+  width: 44px;
+  height: 47px;
+  position: absolute;
+  top: 93px;
+  left: 0;
+  background-image: url('assets/100-error-offline.png');
+  background-image: -webkit-image-set(
+    url('assets/100-error-offline.png') 1x,
+    url('assets/200-error-offline.png') 2x
+  );
+  background-repeat: no-repeat;
+  background-size: 44px 47px;
+  cursor: pointer;
+}
+
+/* Runner Canvas & Container inside game-container */
+.offline .runner-container {
+  height: 150px;
+  max-width: 600px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.offline .runner-canvas {
+  height: 150px;
+  max-width: 600px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* Fullscreen touch layer for mobile taps */
+.offline .controller {
+  background: transparent;
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+#offline-resources {
+  display: none;
+}
+
+/* Diagnostic message is always below game container */
+#main-message {
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  color: #202124;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  margin: 0 0 16px;
+  word-wrap: break-word;
+}
+
+p {
+  color: #5f6368;
+  font-size: 15px;
+  line-height: 22px;
+  margin: 0 0 8px;
+}
+
+ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+li {
+  color: #5f6368;
+  font-size: 15px;
+  line-height: 22px;
+  margin-bottom: 4px;
+}
+
+.error-code {
+  color: #5f6368;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  letter-spacing: 0.2px;
+}
+
+/* Mobile Controls Overlay */
+.mobile-controls {
+  display: none;
+  margin-top: 24px;
+  gap: 16px;
+  justify-content: center;
+}
+
+@media (pointer: coarse) {
+  .mobile-controls {
+    display: flex;
+  }
+}
+
+.touch-btn {
+  background: #f1f3f4;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  color: #3c4043;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 24px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.1s, transform 0.1s;
+}
+
+.touch-btn:active {
+  background: #e8eaed;
+  transform: scale(0.97);
+}
+
+/* Inverted Mode (if triggered after 700 pts) */
+.inverted {
+  background-color: #202124 !important;
+  color: #9aa0a6 !important;
+}
+
+.inverted h1 {
+  color: #e8eaed !important;
+}
+
+.inverted p,
+.inverted li,
+.inverted .error-code {
+  color: #9aa0a6 !important;
+}
+
+.inverted .touch-btn {
+  background: #303134;
+  border-color: #5f6368;
+  color: #e8eaed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .interstitial-wrapper {
+    padding-top: 30px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
